@@ -1,9 +1,10 @@
 # McCoy Vozakis
 # UWYO COSC 1010
-# Submission Date 10/14/24
+# Submission Date 10/20/24
 # Lab 06
 # Lab Section: 14
-# Sources, people worked with, help given to: 
+# Sources, people worked with, help given to: Danny Radosevich, got help during office hours, Stack overflow to figure out the
+# list function on line 114 and 116
 # your
 # comments
 # here
@@ -62,7 +63,7 @@ ibmkdwkqmdkjesqnjiqpijixbwjhenmsrrlpcseliiajlvcaac
 zkdenxczyooloczcaahnkehbwimvieedpdlqfafbqvxvfmvabd
 """
 random_string = random_string.replace("\n","") #remove all newline characters
-print(len(random_string)) # Print out the size for reference 
+print(f"The random string is {len(random_string)} characters long") # Print out the size for reference 
 
 # Above is a string with 2500 characters.
 # Create a program that goes through and counts the occurrence of each character, excluding \n using a  dictionary
@@ -79,32 +80,67 @@ print(len(random_string)) # Print out the size for reference
     # You will  need to add the letter to the dictionary on first occurrence 
     # Then increment its corresponding count 
 
-print(random_string[0])
-
 #Load all the elements into a dictionary
 #Will need to first declare a dictionary 
 
-alphabet={1:"a",2:"b",3:"c",4:"d",5:"e",6:"f",7:"g",8:"h",9:"i",10:"j",11:"k",12:"l",13:"m",14:"n",15:"o",16:"p",17:"q",18:"r",19:"s",20:"t",21:"u",22:"v",23:"w",24:"x",25:"y",26:"z"}
+random_string=sorted(random_string)
 
-for index in random_string:
-    alphref=random_string[index]
-    for alphabet.values() in range(len(alphabet)):
-        if alphabet.values==alphref:
-            
+#print(random_string)
+
+alphabet={}
 
 
+print("Shown below is the sorted dictionary for the random string")
+for index in range(len(random_string)): #Runs through the whole string which is now sorted alphabetically
+    alphref=random_string[index] # This provides us with a variable attatched to the current indexed letter
+    if alphref not in alphabet.keys():
+        alphabet[alphref]=1 # Sees if the given letter is in the dict and if not it is added with a value of one
+    else:
+        alphabet[alphref]+=1 # If the letter is already in the dictionary it adds one to the value
+
+
+ 
 # Output: each letter and its corresponding occurrence in alphabetical order
 
-print("*"*75)
+print(alphabet)
+
 # Output which letter occurred the most 
 
-most_occurred = ""
-least_occurred = ""
+values=list(alphabet.values()) # Creates a list of just the number of letter occurences
 
-print(f"The letter that occurred the most is {most_occurred}")
-print("*"*75)
+keys=list(alphabet.keys()) # Creates a list of the letters of the alphabet
+
+max_value=max(values) # obtains the largest value in the values list
+
+max_value_index=values.index(max_value) # gets the index of the largest value in the values list
+
+max_value_letter=keys[max_value_index]  # matches the index of the largest number to the key letter value
+
+#print(f"The letter that occurred the most is {most_occurred}")
+
+print(f"The letter that occured the most in the random string above was {max_value_letter}, which occured {max_value} times!")
+
 # Output which letter occurred the least 
-print(f"The letter that occurred the most is {least_occurred}")
-print("*"*75)
+
+min_value=min(values) # finds the minimum value
+
+min_value_index=values.index(min_value) # finds the minimum value's index position
+
+min_value_key=keys[min_value_index] # matches the minimum's value index to its key
+
+#print(f"The letter that occurred the least is {least_occurred}")
+
+print(f"The letter that occurred the least in the random string above is {min_value_key}, which occured {min_value} times!")
 
 # Output what the percentage of the string each character is, again in alphabetical
+
+overall_percentage=0 # This is to check that the percentages all add up
+
+for index in range(len(values)):
+    val_ind=(values[index]) # indexes the values in the values list
+    string_percentage=((val_ind/(len(random_string)))*100) # finds the percentage of the list that the given value takes up
+    print(f"The letter {keys[index]} made up {string_percentage}% of the random string!") # puts the key and value percentage together
+
+    overall_percentage+=string_percentage
+
+print(overall_percentage) # Just to check that the percentages add up
